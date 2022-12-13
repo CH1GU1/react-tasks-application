@@ -11,18 +11,26 @@ function App() {
   }, []);
 
   function createTask(task) {
-    setTasks([...tasks, {
-      title:task.title,
-      id: tasks.length,
-      description: task.description
-    }]
-      )
+    setTasks([
+      ...tasks,
+      {
+        title: task.title,
+        id: tasks.length,
+        description: task.description,
+      },
+    ]);
+  }
+
+  function deleteTask(taskID) {
+    console.log(taskID);
+    let newTask = tasks.filter((thisTask) => thisTask.id !== taskID);
+    setTasks(newTask);
   }
 
   return (
     <>
-      <TaskForm createTask={createTask}/>
-      <TaskList tasks={tasks} />
+      <TaskForm createTask={createTask} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} />
     </>
   );
 }
